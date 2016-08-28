@@ -1,11 +1,29 @@
 <?php
 
+// Bootstrap CSS
 function bootstrap_css () {
-	return '<link id="bootstrap-min-css" type="text/css" rel="stylesheet" href="' . LIBS_PATH . '/bootstrap/css/bootstrap.min.css" />';
+	return '<link id="bootstrap-min-css" type="text/css" rel="stylesheet" href="' . LIBS_PATH . 'bootstrap/css/bootstrap.min.css" />';
 }
-
+// Bootstrap JS
 function bootstrap_js () {
-	return '<script id="bootstrap-min-js" type="text/js" src="' . LIBS_PATH . '/bootstrap/js/bootstrap.min.js" />';
+	return '
+	
+	<!-- revert global jQuery and $ variables and store jQuery in a new variable -->
+	<script type="text/javascript">
+		var jQuery_1_8_1 = $.noConflict(true);
+	</script>
+	
+	<!-- load jQuery 1.9.1 -->
+	<script type="text/javascript" src="' . LIBS_PATH . 'jquery/jquery-1.9.1.min.js"></script>
+	
+	<!-- load Bootstrap JS -->
+	<script id="bootstrap-min-js" src="' . LIBS_PATH . 'bootstrap/js/bootstrap.min.js" /></script>
+	
+	';
+}
+// Custom CSS
+function default_css () {
+	return '<link id="default-css" type="text/css" rel="stylesheet" href="' . CSS_PATH . 'default.css" />';
 }
 
 if (!headers_sent())

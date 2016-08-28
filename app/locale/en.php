@@ -16,6 +16,7 @@ $CMS_LANG['login_err'][3] = "Account is disabled";
 $CMS_LANG['login_error'] = "Error";
 
 # Left menu
+$CMS_LANG['navigation'] = "Navigation";
 $CMS_LANG['menu_listings'] = "View list";
 
 $CMS_LANG['menu_options'] = "Options";

@@ -21,19 +21,18 @@
 			echo '<script type="text/javascript" src="'.$js['path'].$js['file'].'"></script>';
 		}
 		echo bootstrap_css();
+		echo default_css();
 		?>
 	</head>
 	<body>
-		<header class="navbar navbar-default navbar-static-top">
+		<header id="header" class="navbar navbar-static-top navbar-default">
 			<div class="container">
 				<div class="navbar-header">
-					<div class="navbar-brand">Player Manager</div>
+					<a href="#" id="logo" class="navbar-brand" target="_blank"><img src="<?php echo INSTALL_URL . IMG_PATH; ?>logo.png" alt="" /></a>
 				</div>
 			</div>
 		</header>
-		
 		<div id="container_cms" class="container">
-
 			<div id="main">
 				<div class="row clearfix">
 					<div class="col-sm-6 col-sm-offset-3">
@@ -41,7 +40,6 @@
 					</div> <!-- /col -->
 				</div> <!-- /row -->
 			</div> <!-- /main -->
-				
 		</div> <!-- container_cms -->
 	</body>
 </html>
