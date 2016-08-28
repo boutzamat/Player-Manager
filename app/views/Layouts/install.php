@@ -12,21 +12,35 @@
 		<?php
 		foreach ($controller->css as $css)
 		{
-			echo '<link type="text/css" rel="stylesheet" href="'.$css['path'].$css['file'].'" />';
+			//Remove the default CSS
+			// echo '<link type="text/css" rel="stylesheet" href="'.$css['path'].$css['file'].'" />';
 		}
 		
 		foreach ($controller->js as $js)
 		{
 			echo '<script type="text/javascript" src="'.$js['path'].$js['file'].'"></script>';
 		}
+		echo bootstrap_css();
 		?>
 	</head>
 	<body>
-		<div id="container_cms">
+		<header class="navbar navbar-default navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+					<div class="navbar-brand">Player Manager</div>
+				</div>
+			</div>
+		</header>
+		
+		<div id="container_cms" class="container">
 
 			<div id="main">
-			<?php require $content_tpl; ?>
-			</div> <!-- main -->
+				<div class="row clearfix">
+					<div class="col-sm-6 col-sm-offset-3">
+						<?php require $content_tpl; ?>
+					</div> <!-- /col -->
+				</div> <!-- /row -->
+			</div> <!-- /main -->
 				
 		</div> <!-- container_cms -->
 	</body>
