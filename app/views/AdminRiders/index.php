@@ -1,52 +1,78 @@
 <?php
+
+ /*
+  *
+  * Template for "View list"
+  *
+  */
+
+?>
+
+<h1 class="page-header"><?php echo $CMS_LANG['menu_listings']; ?></h1>
+
+<?php
 Util::printNotice($tpl['option_arr']['info_box']);
 ?>
-<form id="frmSearch" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="cms-form b10">
+
+<form id="frmSearch" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="cms-form b10 row clearfix">
     <input type="hidden" name="controller" value="AdminRiders" />
     <input type="hidden" name="action" value="search" />
-    <span>
-        <input type="text" name="search_str" value="<?php echo isset($_GET['search_str']) && !empty($_GET['search_str']) ? htmlspecialchars($_GET['search_str']) : NULL; ?>" class="text w300" />
-        <input type="submit" value="" class="button button_search" id="serach_btn_id"/>
-    </span>
 
-    <select name="sort" class="select select-margin">
-        <option value=""><?php echo $CMS_LANG['sort_by']; ?></option>
-        <?php
-        foreach ($CMS_LANG['sort'] as $k => $v) {
-            ?>
-            <option value="<?php echo $k; ?>" <?php echo (isset($_REQUEST['sort']) && $_REQUEST['sort'] == $k) ? "selected='selected'" : ""; ?>><?php echo $v; ?></option>
-            <?php
-        }
-        ?>
-    </select>
-    <select name="filter" class="select select-margin">
-        <option value=""><?php echo $CMS_LANG['filter_by_team']; ?></option>
-        <?php
-        foreach ($tpl['team_arr'] as $k => $v) {
-            ?>
-            <option value="<?php echo $v['id']; ?>" <?php echo (isset($_REQUEST['filter']) && $_REQUEST['filter'] == $v['id']) ? "selected='selected'" : ""; ?>><?php echo $v['team_name']; ?></option>
-            <?php
-        }
-        ?>
-    </select>
-    <select name="group_filter" class="select select-margin">
-        <option value=""><?php echo $CMS_LANG['filter_by_group']; ?></option>
-        <?php
-        foreach ($tpl['group_arr'] as $k => $v) {
-            ?>
-            <option value="<?php echo $v['id']; ?>" <?php echo (isset($_REQUEST['group_filter']) && $_REQUEST['group_filter'] == $v['id']) ? "selected='selected'" : ""; ?>><?php echo $v['group_name']; ?></option>
-            <?php
-        }
-        ?>
-    </select>
-    <div style = "clear: both;"></div>
+    <div class="col-sm-3 form-group">
+		<span class="input-group">
+			<input type="text" name="search_str" placeholder="Search" value="<?php echo isset($_GET['search_str']) && !empty($_GET['search_str']) ? htmlspecialchars($_GET['search_str']) : NULL; ?>" class="text w300 form-control" />
+			<span class="input-group-btn">
+				<button type="submit" value="" class="button button_search btn btn-primary" id="serach_btn_id"><span class="glyphicon glyphicon-search"></span></button>
+			</span>
+		</span>
+    </div>
+
+	<div class="col-sm-3 form-group">
+		<select name="sort" class="select select-margin form-control">
+			<option value=""><?php echo $CMS_LANG['sort_by']; ?></option>
+			<?php
+			foreach ($CMS_LANG['sort'] as $k => $v) {
+				?>
+				<option value="<?php echo $k; ?>" <?php echo (isset($_REQUEST['sort']) && $_REQUEST['sort'] == $k) ? "selected='selected'" : ""; ?>><?php echo $v; ?></option>
+				<?php
+			}
+			?>
+		</select>
+	</div>
+	
+	<div class="col-sm-3 form-group">
+		<select name="filter" class="select select-margin form-control">
+			<option value=""><?php echo $CMS_LANG['filter_by_team']; ?></option>
+			<?php
+			foreach ($tpl['team_arr'] as $k => $v) {
+				?>
+				<option value="<?php echo $v['id']; ?>" <?php echo (isset($_REQUEST['filter']) && $_REQUEST['filter'] == $v['id']) ? "selected='selected'" : ""; ?>><?php echo $v['team_name']; ?></option>
+				<?php
+			}
+			?>
+		</select>
+	</div>
+	
+	<div class="col-sm-3 form-group">
+		<select name="group_filter" class="select select-margin form-control">
+			<option value=""><?php echo $CMS_LANG['filter_by_group']; ?></option>
+			<?php
+			foreach ($tpl['group_arr'] as $k => $v) {
+				?>
+				<option value="<?php echo $v['id']; ?>" <?php echo (isset($_REQUEST['group_filter']) && $_REQUEST['group_filter'] == $v['id']) ? "selected='selected'" : ""; ?>><?php echo $v['group_name']; ?></option>
+				<?php
+			}
+			?>
+		</select>
+	</div>
+	
 </form>
 <?php
 $count = count($tpl['arr']);
 if ($count > 0) {
     ?>
 
-    <table class="cms-table" >
+    <table class="cms-table table table-striped table-condensed" >
         <thead>
             <tr>
                 <th class="sub"><?php echo $CMS_LANG['team_name']; ?></th>
@@ -155,11 +181,11 @@ if ($count > 0) {
     <?php
     if (isset($tpl['paginator'])) {
         ?>
-        <ul class="cms-paginator">
+        <ul class="cms-paginator pagination">
             <?php
             for ($i = 1; $i <= $tpl['paginator']['pages']; $i++) {
                 if ((isset($_GET['page']) && (int) $_GET['page'] == $i) || (!isset($_GET['page']) && $i == 1)) {
-                    ?><li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=<?php echo $_GET['controller']; ?>&amp;action=index&amp;search_str=<?php echo isset($_REQUEST['search_str']) && !empty($_REQUEST['search_str']) ? urlencode($_REQUEST['search_str']) : NULL; ?>&amp;sort=<?php echo isset($_REQUEST['sort']) && !empty($_REQUEST['sort']) ? urlencode($_REQUEST['sort']) : NULL; ?>&amp;filter=<?php echo isset($_REQUEST['filter']) && !empty($_REQUEST['filter']) ? urlencode($_REQUEST['filter']) : NULL; ?>&amp;page=<?php echo $i; ?>" class="focus"><?php echo $i; ?></a></li><?php
+                    ?><li class="active"><a href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=<?php echo $_GET['controller']; ?>&amp;action=index&amp;search_str=<?php echo isset($_REQUEST['search_str']) && !empty($_REQUEST['search_str']) ? urlencode($_REQUEST['search_str']) : NULL; ?>&amp;sort=<?php echo isset($_REQUEST['sort']) && !empty($_REQUEST['sort']) ? urlencode($_REQUEST['sort']) : NULL; ?>&amp;filter=<?php echo isset($_REQUEST['filter']) && !empty($_REQUEST['filter']) ? urlencode($_REQUEST['filter']) : NULL; ?>&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a></li><?php
             } else {
                     ?><li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=<?php echo $_GET['controller']; ?>&amp;action=index&amp;search_str=<?php echo isset($_REQUEST['search_str']) && !empty($_REQUEST['search_str']) ? urlencode($_REQUEST['search_str']) : NULL; ?>&amp;sort=<?php echo isset($_REQUEST['sort']) && !empty($_REQUEST['sort']) ? urlencode($_REQUEST['sort']) : NULL; ?>&amp;filter=<?php echo isset($_REQUEST['filter']) && !empty($_REQUEST['filter']) ? urlencode($_REQUEST['filter']) : NULL; ?>&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a></li><?php
             }

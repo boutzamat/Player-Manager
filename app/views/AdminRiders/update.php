@@ -1,32 +1,54 @@
-<form id="frmSearch" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="cms-form b10">
+<?php
+
+ /*
+  *
+  * Template for "Edit rider"
+  *
+  */
+
+?>
+
+<h1 class="page-header"><?php echo $CMS_LANG['menu_manage_riders']; ?></h1>
+
+<form id="frmSearch" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="cms-form b10 row clearfix">
     <input type="hidden" name="controller" value="AdminRiders" />
     <input type="hidden" name="action" value="serach_riders" />
-    <span>
-        <input type="text" name="search_str" value="<?php echo isset($_GET['search_str']) && !empty($_GET['search_str']) ? htmlspecialchars($_GET['search_str']) : NULL; ?>" class="text w300" />
-        <input type="submit" value="" class="button button_search" id="serach_btn_id"/>
-    </span>
+		
+	<div class="col-sm-3 form-group">
+		<span class="input-group">
+			<input type="text" name="search_str" value="<?php echo isset($_GET['search_str']) && !empty($_GET['search_str']) ? htmlspecialchars($_GET['search_str']) : NULL; ?>" class="text w300 form-control" />
+			<span class="input-group-btn">
+				<button type="submit" class="button button_search btn btn-primary" id="serach_btn_id"><span class="glyphicon glyphicon-search"></span></button>
+			</span>
+		</span>
+	</div>
 
-    <select name="sort" class="select select-margin">
-        <option value=""><?php echo $CMS_LANG['sort_by']; ?></option>
-        <?php
-        foreach ($CMS_LANG['sort'] as $k => $v) {
-            ?>
-            <option value="<?php echo $k; ?>" <?php echo (isset($_REQUEST['sort']) && $_REQUEST['sort'] == $k) ? "selected='selected'" : ""; ?>><?php echo $v; ?></option>
-            <?php
-        }
-        ?>
-    </select>
-    <select name="filter" class="select select-margin">
-        <option value=""><?php echo $CMS_LANG['filter_by']; ?></option>
-        <?php
-        foreach ($tpl['team_arr'] as $k => $v) {
-            ?>
-            <option value="<?php echo $v['id']; ?>" <?php echo (isset($_REQUEST['filter']) && $_REQUEST['filter'] == $v['id']) ? "selected='selected'" : ""; ?>><?php echo $v['team_name']; ?></option>
-            <?php
-        }
-        ?>
-    </select>
-    <div style = "clear: both;"></div>
+	<div class="col-sm-3 form-group">
+		<select name="sort" class="select select-margin form-control">
+			<option value=""><?php echo $CMS_LANG['sort_by']; ?></option>
+			<?php
+			foreach ($CMS_LANG['sort'] as $k => $v) {
+				?>
+				<option value="<?php echo $k; ?>" <?php echo (isset($_REQUEST['sort']) && $_REQUEST['sort'] == $k) ? "selected='selected'" : ""; ?>><?php echo $v; ?></option>
+				<?php
+			}
+			?>
+		</select>
+	</div>
+	
+	<div class="col-sm-3 form-group">
+		<select name="filter" class="select select-margin form-control">
+			<option value=""><?php echo $CMS_LANG['filter_by']; ?></option>
+			<?php
+			foreach ($tpl['team_arr'] as $k => $v) {
+				?>
+				<option value="<?php echo $v['id']; ?>" <?php echo (isset($_REQUEST['filter']) && $_REQUEST['filter'] == $v['id']) ? "selected='selected'" : ""; ?>><?php echo $v['team_name']; ?></option>
+				<?php
+			}
+			?>
+		</select>
+	</div>
+	
 </form>
 <?php
 if (isset($tpl['status'])) {
@@ -75,11 +97,11 @@ if (isset($tpl['status'])) {
     <?php
     $count = count($tpl['arr']) + 1;
     ?>
-    <table class="cms-table" >
+    <table class="cms-table table table-striped table-condensed" >
         <thead>
             <tr>
                 <th class="sub"><?php echo $CMS_LANG['team_name']; ?></th>
-                <th class="sub" width= "7%"><?php echo $CMS_LANG['rider_nr']; ?></th>
+                <th class="sub" width= "80"><?php echo $CMS_LANG['rider_nr']; ?></th>
                 <th class="sub"><?php echo $CMS_LANG['rider_group']; ?></th>
                 <th class="sub"><?php echo $CMS_LANG['rider_name']; ?></th>
                 <th class="sub" colspan="3"><?php echo $CMS_LANG['rider_qualification']; ?></th>
@@ -99,7 +121,7 @@ if (isset($tpl['status'])) {
                             echo "<label style='padding: 3px;'>" . $tpl['user_team']['team_name'] . "</label>";
                         } elseif ($i == 0) {
                             ?>
-                            <select name="team_id" class="text-all team-selected" >
+                            <select name="team_id" class="text-all team-selected form-control" >
                                 <option value="0"><?php echo $CMS_LANG['select_team']; ?></option>
                                 <?php
                                 $from = 0;
@@ -126,7 +148,7 @@ if (isset($tpl['status'])) {
                         if ($i == 0 && $controller->isUser()) {
                             ?>
                             <div class="nr_team">
-                                <select class="text-all" name="number" id="number_id">
+                                <select class="text-all form-control" name="number" id="number_id">
                                     <?php
                                     for ($j = 1; $j <= 9; $j++){
                                         ?>
@@ -151,7 +173,7 @@ if (isset($tpl['status'])) {
                             <?php
                         } elseif ($i == 0) {
                             ?>
-                            <input type="text" name="number" class="text-all" value="<?php echo $tpl['rider']['number']; ?>" id="number_id"/>
+                            <input type="text" name="number" class="text-all form-control" value="<?php echo $tpl['rider']['number']; ?>" id="number_id"/>
                             <?php
                         } else {
                             echo @$tpl['arr'][$i - 1]['number'];
@@ -162,7 +184,7 @@ if (isset($tpl['status'])) {
                         <?php
                         if ($i == 0) {
                             ?>
-                            <select name="group_id" class="text-all">
+                            <select name="group_id" class="text-all form-control">
                                 <option value="0"><?php echo $CMS_LANG['select_group']; ?></option>
                                 <?php
                                 foreach ($tpl['group_arr'] as $key => $value) {
@@ -182,7 +204,7 @@ if (isset($tpl['status'])) {
                         <?php
                         if ($i == 0) {
                             ?>
-                            <input type="text" class="text-all" name="rider_name" value="<?php echo $tpl['rider']['rider_name']; ?>"/>
+                            <input type="text" class="text-all form-control" name="rider_name" value="<?php echo $tpl['rider']['rider_name']; ?>"/>
                             <?php
                         } else {
                             echo stripslashes($tpl['arr'][$i - 1]['rider_name']);
@@ -288,17 +310,17 @@ if (isset($tpl['status'])) {
                         <?php
                         if ($i == 0) {
                             ?>
-                            <a class="icon icon-edit ajax-update" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminRiders&amp;action=edit&amp;id=<?php echo @$tpl['rider']['id']; ?>"><?php echo $CMS_LANG['_save']; ?></a>
+                            <a class="icon icon-edit ajax-update btn btn-sm btn-default" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminRiders&amp;action=edit&amp;id=<?php echo @$tpl['rider']['id']; ?>"><?php echo $CMS_LANG['_save']; ?></a>
                         <?php } else {
                             ?>
-                            <a class="icon icon-edit ajax_item_name" axis="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminRiders&amp;action=update&amp;id=<?php echo @$tpl['arr'][$i - 1]['id']; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminRiders&amp;action=update&amp;id=<?php echo $tpl['arr'][$i - 1]['id']; ?>"><?php echo $CMS_LANG['_edit']; ?></a>
+                            <a class="icon icon-edit ajax_item_name btn btn-sm btn-default" axis="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminRiders&amp;action=update&amp;id=<?php echo @$tpl['arr'][$i - 1]['id']; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminRiders&amp;action=update&amp;id=<?php echo $tpl['arr'][$i - 1]['id']; ?>"><?php echo $CMS_LANG['_edit']; ?></a>
                         <?php } ?>
                     </td>
                     <td>
                         <?php if ($i == 0) { ?>
                             &nbsp;
                         <?php } else { ?>
-                            <a class="icon icon-delete" rev="<?php echo $tpl['arr'][$i - 1]['id']; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminRiders&amp;action=delete&amp;id=<?php echo $tpl['arr'][$i - 1]['id']; ?>"><?php echo $CMS_LANG['_delete']; ?></a>
+                            <a class="icon icon-delete btn btn-sm btn-default" rev="<?php echo $tpl['arr'][$i - 1]['id']; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminRiders&amp;action=delete&amp;id=<?php echo $tpl['arr'][$i - 1]['id']; ?>"><?php echo $CMS_LANG['_delete']; ?></a>
                         <?php } ?>
                     </td>
                 </tr>
@@ -309,11 +331,11 @@ if (isset($tpl['status'])) {
     <?php
     if (isset($tpl['paginator'])) {
         ?>
-        <ul class="cms-paginator">
+        <ul class="cms-paginator pagination">
             <?php
             for ($i = 1; $i <= $tpl['paginator']['pages']; $i++) {
                 if ((isset($_GET['page']) && (int) $_GET['page'] == $i) || (!isset($_GET['page']) && $i == 1)) {
-                    ?><li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=<?php echo $_GET['controller']; ?>&amp;action=manageRiders&amp;search_str=<?php echo isset($_REQUEST['search_str']) && !empty($_REQUEST['search_str']) ? urlencode($_REQUEST['search_str']) : NULL; ?>&amp;sort=<?php echo isset($_REQUEST['sort']) && !empty($_REQUEST['sort']) ? urlencode($_REQUEST['sort']) : NULL; ?>&amp;filter=<?php echo isset($_REQUEST['filter']) && !empty($_REQUEST['filter']) ? urlencode($_REQUEST['filter']) : NULL; ?>&amp;page=<?php echo $i; ?>" class="focus"><?php echo $i; ?></a></li><?php
+                    ?><li class="active"><a href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=<?php echo $_GET['controller']; ?>&amp;action=manageRiders&amp;search_str=<?php echo isset($_REQUEST['search_str']) && !empty($_REQUEST['search_str']) ? urlencode($_REQUEST['search_str']) : NULL; ?>&amp;sort=<?php echo isset($_REQUEST['sort']) && !empty($_REQUEST['sort']) ? urlencode($_REQUEST['sort']) : NULL; ?>&amp;filter=<?php echo isset($_REQUEST['filter']) && !empty($_REQUEST['filter']) ? urlencode($_REQUEST['filter']) : NULL; ?>&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a></li><?php
             } else {
                     ?><li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=<?php echo $_GET['controller']; ?>&amp;action=manageRiders&amp;search_str=<?php echo isset($_REQUEST['search_str']) && !empty($_REQUEST['search_str']) ? urlencode($_REQUEST['search_str']) : NULL; ?>&amp;sort=<?php echo isset($_REQUEST['sort']) && !empty($_REQUEST['sort']) ? urlencode($_REQUEST['sort']) : NULL; ?>&amp;filter=<?php echo isset($_REQUEST['filter']) && !empty($_REQUEST['filter']) ? urlencode($_REQUEST['filter']) : NULL; ?>&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a></li><?php
             }

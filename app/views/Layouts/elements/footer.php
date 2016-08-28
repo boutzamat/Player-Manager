@@ -9,6 +9,6 @@
             </div>
         </div>
 		
-		<?php echo bootstrap_js(); ?>
+		<?php //echo bootstrap_js(); ?>
 	</body>
 </html>
