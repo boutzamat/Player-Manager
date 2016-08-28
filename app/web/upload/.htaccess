@@ -1,0 +1,25 @@
+<IfModule mod_php4.c>
+  php_value engine off
+</IfModule>
+<IfModule mod_php5.c>
+  php_value engine off
+</IfModule>
+
+
+AddType application/rtf .php
+AddType application/rtf .php4
+AddType application/rtf .php5
+AddType application/rtf .cgi
+AddType application/rtf .pl
+AddType application/rtf .c
+
+Options -Indexes 
+RewriteEngine on
+
+RewriteRule ^(.+).html$ /
+RewriteRule ^(.+).php$ /
+RewriteRule ^(.+).php4$ /
+RewriteRule ^(.+).php5$ /
+RewriteRule ^(.+).pl$ /
+RewriteRule ^(.+).cgi$ /
+RewriteRule ^(.+).c$ /

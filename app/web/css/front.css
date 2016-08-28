@@ -1,0 +1,99 @@
+/* 
+    Document   : front
+    Created on : 2012-12-17, 17:55:11
+    Author     : User
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#CMS_wrapper .checked{
+    width: 16px;
+    text-align: left;
+}
+#CMS_wrapper table.cms-table{
+    margin-top: 40px;    
+    border-collapse: collapse;
+}
+
+#CMS_wrapper .cms-table th.sub{
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: left;
+}
+#CMS_wrapper .cms-table td{
+    margin-top: 7px; 
+    border-top: 2px solid #eff1f2;
+    border-bottom: 2px solid #eff1f2;
+    padding: 4px;
+    margin: 5px;
+}
+#CMS_wrapper .cms-table td.t-gray{
+    background-color: #eff1f2; 
+}
+
+#CMS_wrapper .cms-table td.none-border{
+    border: none;
+}
+
+#CMS_wrapper tr{
+    margin: 20px;
+    padding-bottom: 5em;
+}
+#CMS_wrapper table tr td .q_finals{
+    float: left;
+    display: block;
+    width: 50px;
+    padding:  0;
+    margin: 0;
+}
+
+#CMS_wrapper .select-margin {
+    margin-left: 35px;
+    width: 125px;
+}
+#CMS_wrapper .text,#CMS_wrapper  .select,#CMS_wrapper  .textarea {
+    background-color: #FFFFFF;
+    border: 1px solid #A0BAD1;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 2px 2px 1px #E8E8E8 inset;
+    padding: 5px 3px;
+}
+
+/* paginator */
+#CMS_wrapper .cms-paginator{
+    overflow: hidden;
+    margin: 10px 0 0 0;
+}
+#CMS_wrapper .cms-paginator li{
+    display: inline;
+}
+#CMS_wrapper .cms-paginator li a:link,#CMS_wrapper .cms-paginator li a:visited{
+    background-color: #CCCCCC;
+    color: #000;
+    display: block;
+    float: left;
+    margin: 0 2px 0 0;
+    padding: 1px 4px;
+    border-radius: 2px;
+    text-decoration: none;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+}
+#CMS_wrapper .cms-paginator li a:hover{
+    background-color: #EAEAEA;
+}
+#CMS_wrapper .cms-paginator li a.focus{
+    background-color: #072B4F;
+    color: #fff;
+}
+#CMS_wrapper .title{
+    font-weight: bold;
+    text-transform: uppercase;
+    float: left;
+    width: 147px;
+}
