@@ -1,4 +1,13 @@
 <?php
+
+function bootstrap_css () {
+	return '<link id="bootstrap-min-css" type="text/css" rel="stylesheet" href="' . LIBS_PATH . '/bootstrap/css/bootstrap.min.css" />';
+}
+
+function bootstrap_js () {
+	return '<script id="bootstrap-min-js" type="text/js" src="' . LIBS_PATH . '/bootstrap/js/bootstrap.min.js" />';
+}
+
 if (!headers_sent())
 {
 	//session_name('StivaSoft');
