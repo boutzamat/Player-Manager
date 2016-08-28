@@ -73,3 +73,6 @@ CREATE TABLE IF NOT EXISTS `simple_cms_options` (
 INSERT INTO `simple_cms_roles` (`id`, `role`, `status`) VALUES
 (1, 'admin', 'T'),
 (2, 'user', 'T');
+
+INSERT INTO `simple_cms_options`(`id`, `key`, `tab_id`, `group`, `value`, `description`, `label`, `type`, `order`) VALUES
+(NULL, 'info_box', 1, NULL, '', 'Info Box', NULL, 'text', 1);

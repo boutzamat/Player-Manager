@@ -142,10 +142,23 @@ class Front extends AppController {
                 $search = array();
             }
 
-            if (!empty($_REQUEST['filter'])) {
+            if (!empty($_REQUEST['filter']) && !empty($_REQUEST['group_filter'])) {
                 $filter['t1.team_id'] = $_REQUEST['filter'];
+                $filter['t1.group_id'] = $_REQUEST['group_filter'];
+            } elseif (!empty($_REQUEST['filter'])) {
+                $filter['t1.team_id'] = $_REQUEST['filter'];
+            } elseif (!empty($_REQUEST['group_filter'])) {
+                $filter['t1.group_id'] = $_REQUEST['group_filter'];
             } else {
                 $filter = array();
+            }
+
+            Object::import('Model', 'Option');
+            $OptionModel = new OptionModel();
+            $option_arr = $OptionModel->getAll();
+            
+            foreach($option_arr as $key => $value){
+                $this->tpl['option_arr'][$value['key']] = $value['value'];
             }
 
             $page = isset($_GET['page']) && (int) $_GET['page'] > 0 ? intval($_GET['page']) : 1;
@@ -158,6 +171,7 @@ class Front extends AppController {
             $arr = $RiderModel->getAll(array_merge($opts, $sort, $search, $filter, $offset_arr));
 
             $this->tpl['team_arr'] = $TeamModel->getAll();
+            $this->tpl['group_arr'] = $GroupModel->getAll();
             $this->tpl['arr'] = $arr;
             $this->tpl['paginator'] = array('pages' => $pages);
         }

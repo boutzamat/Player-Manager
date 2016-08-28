@@ -26,7 +26,7 @@ if (isset($tpl['status'])) {
             case 5:
                 Util::printNotice($CMS_LANG['user_err'][5]);
                 break;
-             case 6:
+            case 6:
                 Util::printNotice($CMS_LANG['user_err'][6]);
                 break;
         }
@@ -46,11 +46,12 @@ if (isset($tpl['status'])) {
                 if ($controller->isUser()) {
                     ?>
                     <p><label class="title"><?php echo $CMS_LANG['team']; ?></label>
-                        <?php echo $CMS_LANG['team_name']; ?>
+                        <?php echo $tpl['arr']['team_name']; ?>
                     </p>
                     <?php
                 }
                 ?>
+                <p><label class="title"><?php echo $CMS_LANG['phone']; ?></label><input type="text" name="phone" id="phone" value="<?php echo htmlspecialchars(stripslashes($tpl['arr']['phone'])); ?>" class="text w300 required phone" /></p>
                 <p><label class="title"><?php echo $CMS_LANG['user_email']; ?></label><input type="text" name="email" id="email" value="<?php echo htmlspecialchars(stripslashes($tpl['arr']['email'])); ?>" class="text w300 required email" /></p>
                 <p><label class="title"><?php echo $CMS_LANG['user_password']; ?></label><input type="password" name="password" id="password" value="password" class="text w150 required" /></p>
                 <p>

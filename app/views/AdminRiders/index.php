@@ -1,3 +1,6 @@
+<?php
+Util::printNotice($tpl['option_arr']['info_box']);
+?>
 <form id="frmSearch" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="cms-form b10">
     <input type="hidden" name="controller" value="AdminRiders" />
     <input type="hidden" name="action" value="search" />
@@ -17,11 +20,21 @@
         ?>
     </select>
     <select name="filter" class="select select-margin">
-        <option value=""><?php echo $CMS_LANG['filter_by']; ?></option>
+        <option value=""><?php echo $CMS_LANG['filter_by_team']; ?></option>
         <?php
         foreach ($tpl['team_arr'] as $k => $v) {
             ?>
             <option value="<?php echo $v['id']; ?>" <?php echo (isset($_REQUEST['filter']) && $_REQUEST['filter'] == $v['id']) ? "selected='selected'" : ""; ?>><?php echo $v['team_name']; ?></option>
+            <?php
+        }
+        ?>
+    </select>
+    <select name="group_filter" class="select select-margin">
+        <option value=""><?php echo $CMS_LANG['filter_by_group']; ?></option>
+        <?php
+        foreach ($tpl['group_arr'] as $k => $v) {
+            ?>
+            <option value="<?php echo $v['id']; ?>" <?php echo (isset($_REQUEST['group_filter']) && $_REQUEST['group_filter'] == $v['id']) ? "selected='selected'" : ""; ?>><?php echo $v['group_name']; ?></option>
             <?php
         }
         ?>

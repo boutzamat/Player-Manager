@@ -55,7 +55,11 @@ if (isset($tpl['status'])) {
     <div id="tabs" class="tab-user-general">
         <ul>
             <li><a href="#tabs-1"><?php echo $CMS_LANG['user_list']; ?></a></li>
-            <li><a href="#tabs-2"><?php echo $CMS_LANG['user_create']; ?></a></li>
+            <?php
+            if ($controller->isAdmin()) {
+                ?>
+                <li><a href="#tabs-2"><?php echo $CMS_LANG['user_create']; ?></a></li>
+            <?php } ?>
         </ul>
         <div id="tabs-1">
             <?php
@@ -71,8 +75,12 @@ if (isset($tpl['status'])) {
                                     <th class="sub"><?php echo $CMS_LANG['user_team']; ?></th>
                                     <th class="sub"><?php echo $CMS_LANG['user_phone']; ?></th>
                                     <th class="sub"><?php echo $CMS_LANG['user_email']; ?></th>
-                                    <th class="sub" width= "10%"></th>
-                                    <th class="sub" width= "10%"></th>
+                                    <?php
+                                    if ($controller->isAdmin()) {
+                                        ?>
+                                        <th class="sub" width= "10%"></th>
+                                        <th class="sub" width= "10%"></th>
+                                    <?php } ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,22 +90,26 @@ if (isset($tpl['status'])) {
                                         continue;
                                     ?>
                                     <tr class="<?php echo $i % 2 === 0 ? 'odd' : 'even'; ?>">
-                                        <td class = "scms_item_name" axis="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=update&amp;id=<?php echo $tpl['arr'][$i]['id']; ?>" ><?php echo stripslashes($tpl['arr'][$i]['full_name']); ?></td>
-                                        <td class = "scms_item_name" axis="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=update&amp;id=<?php echo $tpl['arr'][$i]['id']; ?>" ><?php echo stripslashes($tpl['arr'][$i]['team_name']); ?></td>
-                                        <td class = "scms_item_name" axis="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=update&amp;id=<?php echo $tpl['arr'][$i]['id']; ?>" ><?php echo stripslashes($tpl['arr'][$i]['phone']); ?></td>
-                                        <td class = "scms_item_name" axis="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=update&amp;id=<?php echo $tpl['arr'][$i]['id']; ?>" ><?php echo stripslashes($tpl['arr'][$i]['email']); ?></td>
-                                        <td><a class="icon icon-edit" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=update&amp;id=<?php echo $tpl['arr'][$i]['id']; ?>"><?php echo $CMS_LANG['_edit']; ?></a></td>
-                                        <td>
-                                            <?php
-                                            if ($tpl['arr'][$i]['id'] == 1) {
-                                                echo "&nbsp;";
-                                            } else {
-                                                ?>
-                                                <a class="icon icon-delete" rev="<?php echo $tpl['arr'][$i]['id']; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=delete&amp;id=<?php echo $tpl['arr'][$i]['id']; ?>"><?php echo $CMS_LANG['_delete']; ?></a>
-                                                <?php
-                                            }
+                                        <td class = "<?php echo ($controller->isAdmin())?"scms_item_name":""; ?>" axis="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=update&amp;id=<?php echo $tpl['arr'][$i]['id']; ?>" ><?php echo stripslashes($tpl['arr'][$i]['full_name']); ?></td>
+                                        <td class = "<?php echo ($controller->isAdmin())?"scms_item_name":""; ?>" axis="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=update&amp;id=<?php echo $tpl['arr'][$i]['id']; ?>" ><?php echo stripslashes($tpl['arr'][$i]['team_name']); ?></td>
+                                        <td class = "<?php echo ($controller->isAdmin())?"scms_item_name":""; ?>" axis="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=update&amp;id=<?php echo $tpl['arr'][$i]['id']; ?>" ><?php echo stripslashes($tpl['arr'][$i]['phone']); ?></td>
+                                        <td class = "<?php echo ($controller->isAdmin())?"scms_item_name":""; ?>" axis="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=update&amp;id=<?php echo $tpl['arr'][$i]['id']; ?>" ><?php echo stripslashes($tpl['arr'][$i]['email']); ?></td>
+                                        <?php
+                                        if ($controller->isAdmin()) {
                                             ?>
-                                        </td>
+                                            <td><a class="icon icon-edit" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=update&amp;id=<?php echo $tpl['arr'][$i]['id']; ?>"><?php echo $CMS_LANG['_edit']; ?></a></td>
+                                            <td>
+                                                <?php
+                                                if ($tpl['arr'][$i]['id'] == 1) {
+                                                    echo "&nbsp;";
+                                            } else {
+                                                    ?>
+                                                    <a class="icon icon-delete" rev="<?php echo $tpl['arr'][$i]['id']; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=delete&amp;id=<?php echo $tpl['arr'][$i]['id']; ?>"><?php echo $CMS_LANG['_delete']; ?></a>
+                                                    <?php
+                                            }
+                                                ?>
+                                            </td>
+                                        <?php } ?>
                                     </tr>
                                     <?php
                                 }
@@ -138,47 +150,53 @@ if (isset($tpl['status'])) {
             }
             ?>
         </div> <!-- tabs-1 -->
-        <div id="tabs-2">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=create" method="post" id="frmCreateUser" class="cms-form">
-                <input type="hidden" name="user_create" value="1" />
-                <p><label class="title"><?php echo $CMS_LANG['user_role']; ?></label>
-                    <select name="role_id" id="role_id" class="select w150 required">
-                        <option value=""><?php echo $CMS_LANG['user_choose']; ?></option>
-                        <?php
-                        foreach ($tpl['role_arr'] as $v) {
-                            ?><option value="<?php echo $v['id']; ?>"><?php echo stripslashes($v['role']); ?></option><?php
+        <?php
+        if ($controller->isAdmin()) {
+            ?>
+            <div id="tabs-2">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&amp;action=create" method="post" id="frmCreateUser" class="cms-form">
+                    <input type="hidden" name="user_create" value="1" />
+                    <p><label class="title"><?php echo $CMS_LANG['user_role']; ?></label>
+                        <select name="role_id" id="role_id" class="select w150 required">
+                            <option value=""><?php echo $CMS_LANG['user_choose']; ?></option>
+                            <?php
+                            foreach ($tpl['role_arr'] as $v) {
+                                ?><option value="<?php echo $v['id']; ?>"><?php echo stripslashes($v['role']); ?></option><?php
                 }
-                        ?>
-                    </select>
-                </p>
-                <p><label class="title"><?php echo $CMS_LANG['user_team']; ?></label>
-                    <select name="team_id" id="team_id" class="select" >
-                        <?php
-                        foreach ($tpl['team_arr'] as $v) {
-                            ?><option value="<?php echo $v['id']; ?>"><?php echo stripslashes($v['team_name']); ?></option><?php
+                            ?>
+                        </select>
+                    </p>
+                    <p><label class="title"><?php echo $CMS_LANG['user_team']; ?></label>
+                        <select name="team_id" id="team_id" class="select" >
+                            <?php
+                            foreach ($tpl['team_arr'] as $v) {
+                                ?><option value="<?php echo $v['id']; ?>"><?php echo stripslashes($v['team_name']); ?></option><?php
                 }
-                        ?>
-                    </select>
-                </p>
-                <p><label class="title"><?php echo $CMS_LANG['user_full_name']; ?></label><input type="text" name="full_name" id="full_name" class="text w150 required" /></p>
-                <p><label class="title"><?php echo $CMS_LANG['user_phone']; ?></label><input type="text" name="phone" id="phone" class="text w150 required" /></p>
-                <p><label class="title"><?php echo $CMS_LANG['user_email']; ?></label><input type="text" name="email" id="email" class="text w300 required email" /></p>
-                <p><label class="title"><?php echo $CMS_LANG['user_password']; ?></label><input type="password" name="password" id="password" class="text w150 required" /></p>
-                <p><label class="title"><?php echo $CMS_LANG['user_status']; ?></label>
-                    <select name="status" id="status" class="select w150">
-                        <?php
-                        foreach ($CMS_LANG['user_statarr'] as $k => $v) {
-                            ?><option value="<?php echo $k; ?>"><?php echo $v; ?></option><?php
+                            ?>
+                        </select>
+                    </p>
+                    <p><label class="title"><?php echo $CMS_LANG['user_full_name']; ?></label><input type="text" name="full_name" id="full_name" class="text w150 required" /></p>
+                    <p><label class="title"><?php echo $CMS_LANG['user_phone']; ?></label><input type="text" name="phone" id="phone" class="text w150 required" /></p>
+                    <p><label class="title"><?php echo $CMS_LANG['user_email']; ?></label><input type="text" name="email" id="email" class="text w300 required email" /></p>
+                    <p><label class="title"><?php echo $CMS_LANG['user_password']; ?></label><input type="password" name="password" id="password" class="text w150 required" /></p>
+                    <p><label class="title"><?php echo $CMS_LANG['user_status']; ?></label>
+                        <select name="status" id="status" class="select w150">
+                            <?php
+                            foreach ($CMS_LANG['user_statarr'] as $k => $v) {
+                                ?><option value="<?php echo $k; ?>"><?php echo $v; ?></option><?php
                 }
-                        ?>
-                    </select>
-                </p>
-                <p>
-                    <label class="title">&nbsp;</label>
-                    <input type="submit" value="" class="button button_save" />
-                </p>
-            </form>
-        </div> <!-- tabs-2 -->
+                            ?>
+                        </select>
+                    </p>
+                    <p>
+                        <label class="title">&nbsp;</label>
+                        <input type="submit" value="" class="button button_save" />
+                    </p>
+                </form>
+            </div> <!-- tabs-2 --> 
+            <?php
+}
+        ?>
     </div>
     <?php
 }

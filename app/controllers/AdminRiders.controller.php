@@ -12,6 +12,13 @@ class AdminRiders extends Admin {
 
     function index() {
         if ($this->isLoged()) {
+            Object::import('Model', 'Option');
+            $OptionModel = new OptionModel();
+            $option_arr = $OptionModel->getAll();
+
+            foreach ($option_arr as $key => $value) {
+                $this->tpl['option_arr'][$value['key']] = $value['value'];
+            }
 
             Object::import('Model', array('Rider', 'Team', 'Group'));
             $RiderModel = new RiderModel();
@@ -68,8 +75,13 @@ class AdminRiders extends Admin {
                 $search = array();
             }
 
-            if (!empty($_REQUEST['filter'])) {
+            if (!empty($_REQUEST['filter']) && !empty($_REQUEST['group_filter'])) {
                 $filter['t1.team_id'] = $_REQUEST['filter'];
+                $filter['t1.group_id'] = $_REQUEST['group_filter'];
+            } elseif (!empty($_REQUEST['filter'])) {
+                $filter['t1.team_id'] = $_REQUEST['filter'];
+            } elseif (!empty($_REQUEST['group_filter'])) {
+                $filter['t1.group_id'] = $_REQUEST['group_filter'];
             } else {
                 $filter = array();
             }
@@ -103,6 +115,14 @@ class AdminRiders extends Admin {
     function manageRiders() {
 
         if ($this->isLoged()) {
+            Object::import('Model', 'Option');
+            $OptionModel = new OptionModel();
+            $option_arr = $OptionModel->getAll();
+
+            foreach ($option_arr as $key => $value) {
+                $this->tpl['option_arr'][$value['key']] = $value['value'];
+            }
+
             Object::import('Model', array('Rider', 'Team', 'Group'));
             $RiderModel = new RiderModel();
             $TeamModel = new TeamModel();
@@ -162,8 +182,13 @@ class AdminRiders extends Admin {
                 $search = array();
             }
 
-            if (!empty($_REQUEST['filter'])) {
+            if (!empty($_REQUEST['filter']) && !empty($_REQUEST['group_filter'])) {
                 $filter['t1.team_id'] = $_REQUEST['filter'];
+                $filter['t1.group_id'] = $_REQUEST['group_filter'];
+            } elseif (!empty($_REQUEST['filter'])) {
+                $filter['t1.team_id'] = $_REQUEST['filter'];
+            } elseif (!empty($_REQUEST['group_filter'])) {
+                $filter['t1.group_id'] = $_REQUEST['group_filter'];
             } else {
                 $filter = array();
             }
@@ -213,6 +238,14 @@ class AdminRiders extends Admin {
     function addRider() {
         $this->isAjax = true;
         if ($this->isXHR()) {
+            Object::import('Model', 'Option');
+            $OptionModel = new OptionModel();
+            $option_arr = $OptionModel->getAll();
+
+            foreach ($option_arr as $key => $value) {
+                $this->tpl['option_arr'][$value['key']] = $value['value'];
+            }
+
             Object::import('Model', array('Rider', 'Team', 'Group'));
             $TeamModel = new TeamModel();
             $RiderModel = new RiderModel();
@@ -259,9 +292,8 @@ class AdminRiders extends Admin {
 
                 if ($this->isUser()) {
                     $this->tpl['user_team'] = $TeamModel->get($this->getUserTeamId());
-                    $opts['t1.user_id'] = $this->getUserId();
+                    $opts['t1.team_id'] = $this->getUserTeamId();
                 }
-
                 $RiderModel->addJoin($RiderModel->joins, $TeamModel->getTable(), 'TM', array('TM.id' => 't1.team_id'), array('TM.team_name'));
                 $RiderModel->addJoin($RiderModel->joins, $GroupModel->getTable(), 'GM', array('GM.id' => 't1.group_id'), array('GM.group_name'));
                 if (!empty($_REQUEST['sort'])) {
@@ -305,8 +337,13 @@ class AdminRiders extends Admin {
                     $search = array();
                 }
 
-                if (!empty($_REQUEST['filter'])) {
+                if (!empty($_REQUEST['filter']) && !empty($_REQUEST['group_filter'])) {
                     $filter['t1.team_id'] = $_REQUEST['filter'];
+                    $filter['t1.group_id'] = $_REQUEST['group_filter'];
+                } elseif (!empty($_REQUEST['filter'])) {
+                    $filter['t1.team_id'] = $_REQUEST['filter'];
+                } elseif (!empty($_REQUEST['group_filter'])) {
+                    $filter['t1.group_id'] = $_REQUEST['group_filter'];
                 } else {
                     $filter = array();
                 }
@@ -318,6 +355,7 @@ class AdminRiders extends Admin {
                 $offset = ((int) $page - 1) * $row_count;
 
                 $offset_arr = array('offset' => $offset, 'row_count' => $row_count);
+
                 $arr = $RiderModel->getAll(array_merge($opts, $sort, $search, $filter, $offset_arr));
 
                 $this->tpl['team_arr'] = $TeamModel->getAll();
@@ -325,7 +363,7 @@ class AdminRiders extends Admin {
                 $this->tpl['arr'] = $arr;
                 $this->tpl['paginator'] = array('pages' => $pages);
 
-                $this->index();
+                //$this->index();
 
                 return;
             }
@@ -333,6 +371,7 @@ class AdminRiders extends Admin {
             $opts = array();
 
             if ($this->isUser()) {
+
                 $opts['t1.team_id'] = $this->getUserTeamId();
                 $this->tpl['user_team'] = $TeamModel->get($this->getUserTeamId());
             }
@@ -380,8 +419,13 @@ class AdminRiders extends Admin {
                 $search = array();
             }
 
-            if (!empty($_REQUEST['filter'])) {
+            if (!empty($_REQUEST['filter']) && !empty($_REQUEST['group_filter'])) {
                 $filter['t1.team_id'] = $_REQUEST['filter'];
+                $filter['t1.group_id'] = $_REQUEST['group_filter'];
+            } elseif (!empty($_REQUEST['filter'])) {
+                $filter['t1.team_id'] = $_REQUEST['filter'];
+            } elseif (!empty($_REQUEST['group_filter'])) {
+                $filter['t1.group_id'] = $_REQUEST['group_filter'];
             } else {
                 $filter = array();
             }
@@ -407,6 +451,14 @@ class AdminRiders extends Admin {
         if ($this->isXHR()) {
             if ($this->isLoged()) {
                 if ($this->isAdmin() || $this->isUser()) {
+
+                    Object::import('Model', 'Option');
+                    $OptionModel = new OptionModel();
+                    $option_arr = $OptionModel->getAll();
+
+                    foreach ($option_arr as $key => $value) {
+                        $this->tpl['option_arr'][$value['key']] = $value['value'];
+                    }
 
                     if ($this->isXHR()) {
                         $this->isAjax = true;
@@ -459,6 +511,15 @@ class AdminRiders extends Admin {
     function update() {
         $this->isAjax = true;
         if ($this->isXHR()) {
+
+            Object::import('Model', 'Option');
+            $OptionModel = new OptionModel();
+            $option_arr = $OptionModel->getAll();
+
+            foreach ($option_arr as $key => $value) {
+                $this->tpl['option_arr'][$value['key']] = $value['value'];
+            }
+
             Object::import('Model', array('Rider', 'Team', 'Group'));
             $RiderModel = new RiderModel();
             $TeamModel = new TeamModel();
@@ -516,8 +577,13 @@ class AdminRiders extends Admin {
                 $search = array();
             }
 
-            if (!empty($_REQUEST['filter'])) {
+            if (!empty($_REQUEST['filter']) && !empty($_REQUEST['group_filter'])) {
                 $filter['t1.team_id'] = $_REQUEST['filter'];
+                $filter['t1.group_id'] = $_REQUEST['group_filter'];
+            } elseif (!empty($_REQUEST['filter'])) {
+                $filter['t1.team_id'] = $_REQUEST['filter'];
+            } elseif (!empty($_REQUEST['group_filter'])) {
+                $filter['t1.group_id'] = $_REQUEST['group_filter'];
             } else {
                 $filter = array();
             }
@@ -543,7 +609,13 @@ class AdminRiders extends Admin {
         $this->isAjax = true;
 
         if ($this->isXHR()) {
+            Object::import('Model', 'Option');
+            $OptionModel = new OptionModel();
+            $option_arr = $OptionModel->getAll();
 
+            foreach ($option_arr as $key => $value) {
+                $this->tpl['option_arr'][$value['key']] = $value['value'];
+            }
             Object::import('Model', array('Rider', 'Team', 'Group'));
             $TeamModel = new TeamModel();
             $RiderModel = new RiderModel();
@@ -634,8 +706,13 @@ class AdminRiders extends Admin {
                     $search = array();
                 }
 
-                if (!empty($_REQUEST['filter'])) {
+                if (!empty($_REQUEST['filter']) && !empty($_REQUEST['group_filter'])) {
                     $filter['t1.team_id'] = $_REQUEST['filter'];
+                    $filter['t1.group_id'] = $_REQUEST['group_filter'];
+                } elseif (!empty($_REQUEST['filter'])) {
+                    $filter['t1.team_id'] = $_REQUEST['filter'];
+                } elseif (!empty($_REQUEST['group_filter'])) {
+                    $filter['t1.group_id'] = $_REQUEST['group_filter'];
                 } else {
                     $filter = array();
                 }
@@ -709,8 +786,13 @@ class AdminRiders extends Admin {
                 $search = array();
             }
 
-            if (!empty($_REQUEST['filter'])) {
+            if (!empty($_REQUEST['filter']) && !empty($_REQUEST['group_filter'])) {
                 $filter['t1.team_id'] = $_REQUEST['filter'];
+                $filter['t1.group_id'] = $_REQUEST['group_filter'];
+            } elseif (!empty($_REQUEST['filter'])) {
+                $filter['t1.team_id'] = $_REQUEST['filter'];
+            } elseif (!empty($_REQUEST['group_filter'])) {
+                $filter['t1.group_id'] = $_REQUEST['group_filter'];
             } else {
                 $filter = array();
             }
@@ -736,7 +818,13 @@ class AdminRiders extends Admin {
 
         if ($this->isXHR()) {
             if ($this->isLoged()) {
+                Object::import('Model', 'Option');
+                $OptionModel = new OptionModel();
+                $option_arr = $OptionModel->getAll();
 
+                foreach ($option_arr as $key => $value) {
+                    $this->tpl['option_arr'][$value['key']] = $value['value'];
+                }
                 Object::import('Model', array('Rider', 'Team', 'Group'));
                 $RiderModel = new RiderModel();
                 $TeamModel = new TeamModel();
@@ -745,7 +833,7 @@ class AdminRiders extends Admin {
                 $opts = array();
 
                 if ($this->isUser()) {
-                   // $opts['t1.team_id'] = $this->getUserTeamId();
+                    // $opts['t1.team_id'] = $this->getUserTeamId();
                     $this->tpl['user_team'] = $TeamModel->get($this->getUserTeamId());
                 }
 
@@ -793,8 +881,13 @@ class AdminRiders extends Admin {
                     $search = array();
                 }
 
-                if (!empty($_REQUEST['filter'])) {
+                if (!empty($_REQUEST['filter']) && !empty($_REQUEST['group_filter'])) {
                     $filter['t1.team_id'] = $_REQUEST['filter'];
+                    $filter['t1.group_id'] = $_REQUEST['group_filter'];
+                } elseif (!empty($_REQUEST['filter'])) {
+                    $filter['t1.team_id'] = $_REQUEST['filter'];
+                } elseif (!empty($_REQUEST['group_filter'])) {
+                    $filter['t1.group_id'] = $_REQUEST['group_filter'];
                 } else {
                     $filter = array();
                 }
@@ -809,6 +902,7 @@ class AdminRiders extends Admin {
                 $arr = $RiderModel->getAll(array_merge($opts, $sort, $search, $filter, $offset_arr));
 
                 $this->tpl['team_arr'] = $TeamModel->getAll();
+                $this->tpl['group_arr'] = $GroupModel->getAll();
                 $this->tpl['arr'] = $arr;
                 $this->tpl['paginator'] = array('pages' => $pages);
 
@@ -824,7 +918,13 @@ class AdminRiders extends Admin {
 
         if ($this->isXHR()) {
             if ($this->isLoged()) {
+                Object::import('Model', 'Option');
+                $OptionModel = new OptionModel();
+                $option_arr = $OptionModel->getAll();
 
+                foreach ($option_arr as $key => $value) {
+                    $this->tpl['option_arr'][$value['key']] = $value['value'];
+                }
                 Object::import('Model', array('Rider', 'Team', 'Group'));
                 $RiderModel = new RiderModel();
                 $TeamModel = new TeamModel();
@@ -884,12 +984,13 @@ class AdminRiders extends Admin {
                     $search = array();
                 }
 
-                if (!empty($_REQUEST['filter'])) {
-                    if ($this->isUser()) {
-                        $filter['t1.group_id'] = $_REQUEST['filter'];
-                    } else {
-                        $filter['t1.team_id'] = $_REQUEST['filter'];
-                    }
+                if (!empty($_REQUEST['filter']) && !empty($_REQUEST['group_filter'])) {
+                    $filter['t1.team_id'] = $_REQUEST['filter'];
+                    $filter['t1.group_id'] = $_REQUEST['group_filter'];
+                } elseif (!empty($_REQUEST['filter'])) {
+                    $filter['t1.team_id'] = $_REQUEST['filter'];
+                } elseif (!empty($_REQUEST['group_filter'])) {
+                    $filter['t1.group_id'] = $_REQUEST['group_filter'];
                 } else {
                     $filter = array();
                 }

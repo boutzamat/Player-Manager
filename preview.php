@@ -16,6 +16,11 @@ $id = isset($_GET['id']) && (int) $_GET['id'] > 0 ? (int) $_GET['id'] : NULL;
 		<title></title>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<link href="<?php echo INSTALL_FOLDER; ?>app/web/css/front.css" type="text/css" rel="stylesheet" />
+                <link href="<?php echo INSTALL_FOLDER; ?>app/web/css/prettyCheckable.css" type="text/css" rel="stylesheet" />
+                
+                <script type="text/javascript" src="<?php echo INSTALL_FOLDER; ?>core/libs/jquery/jquery-1.8.1.min.js"></script>
+                <script type="text/javascript" src="<?php echo INSTALL_FOLDER; ?>app/web/js/prettyCheckable.js"></script>
+                
                 <script type="text/javascript" src="<?php echo INSTALL_FOLDER; ?>app/web/js/jabb-0.3.js"></script>
 		<script type="text/javascript" src="<?php echo INSTALL_FOLDER; ?>app/web/js/scms.js"></script>
 	</head>

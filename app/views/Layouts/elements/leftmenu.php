@@ -27,19 +27,19 @@ if (is_file(INSTALL_PATH . "one-admin.php")) {
             <?php
         }
         ?>
-        <!-- <li  class="list-group-item"><a class="<?php echo $_GET['controller'] == 'AdminUsers' && $_GET['action'] == 'profile' ? 'cms-menu-focus' : NULL; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&action=profile"><span class="cms-menu-profile">&nbsp;</span><?php echo $CMS_LANG['menu_user_profile']; ?></a></li> -->
         <?php
         if ($controller->isAdmin()) {
-            /*
-              ?><li  class="list-group-item"><a class="<?php echo $_GET['controller'] == 'AdminOptions' && $_GET['action'] == 'index' ? 'cms-menu-focus' : NULL; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminOptions"><span class="cms-menu-options">&nbsp;</span><?php echo $CMS_LANG['menu_options']; ?></a></li>
-              <?php */
+			
             ?>
+			<li  class="list-group-item"><a class="<?php echo $_GET['controller'] == 'AdminOptions' && $_GET['action'] == 'index' ? 'cms-menu-focus' : NULL; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminOptions"><span class="cms-menu-options">&nbsp;</span><?php echo $CMS_LANG['menu_options']; ?></a></li>
             <li  class="list-group-item"><a class="<?php echo $_GET['controller'] == 'AdminOptions' && $_GET['action'] == 'install' ? 'cms-menu-focus' : NULL; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminOptions&action=install"><span class="cms-menu-install">&nbsp;</span><?php echo $CMS_LANG['menu_install']; ?></a></li>
             <?php
         }
         ?>
-        <li  class="list-group-item"><a href="<?php echo INSTALL_URL; ?>preview.php" target="_blank"><span class="cms-menu-preview">&nbsp;</span><?php echo $CMS_LANG['menu_preview']; ?></a></li>
-        <!-- <li  class="list-group-item"><a href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=Admin&amp;action=logout"><span class="cms-menu-logout">&nbsp;</span><?php echo $CMS_LANG['menu_logout']; ?></a></li> -->
+		
+        <!-- <li  class="list-group-item"><a href="<?php echo INSTALL_URL; ?>preview.php" target="_blank"><span class="cms-menu-preview">&nbsp;</span><?php echo $CMS_LANG['menu_preview']; ?></a></li> -->
+        <!-- <li  class="list-group-item"><a class="<?php echo $_GET['controller'] == 'AdminUsers' && $_GET['action'] == 'profile' ? 'cms-menu-focus' : NULL; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminUsers&action=profile"><span class="cms-menu-profile">&nbsp;</span><?php echo $CMS_LANG['menu_user_profile']; ?></a></li> -->
+		<!-- <li  class="list-group-item"><a href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=Admin&amp;action=logout"><span class="cms-menu-logout">&nbsp;</span><?php echo $CMS_LANG['menu_logout']; ?></a></li> -->
     </ul>
 </div>
 

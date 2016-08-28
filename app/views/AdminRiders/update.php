@@ -79,7 +79,7 @@ if (isset($tpl['status'])) {
         <thead>
             <tr>
                 <th class="sub"><?php echo $CMS_LANG['team_name']; ?></th>
-                <th class="sub"><?php echo $CMS_LANG['rider_nr']; ?></th>
+                <th class="sub" width= "7%"><?php echo $CMS_LANG['rider_nr']; ?></th>
                 <th class="sub"><?php echo $CMS_LANG['rider_group']; ?></th>
                 <th class="sub"><?php echo $CMS_LANG['rider_name']; ?></th>
                 <th class="sub" colspan="3"><?php echo $CMS_LANG['rider_qualification']; ?></th>
@@ -99,7 +99,7 @@ if (isset($tpl['status'])) {
                             echo "<label style='padding: 3px;'>" . $tpl['user_team']['team_name'] . "</label>";
                         } elseif ($i == 0) {
                             ?>
-                            <select name="team_id" class="text-all team-selected">
+                            <select name="team_id" class="text-all team-selected" >
                                 <option value="0"><?php echo $CMS_LANG['select_team']; ?></option>
                                 <?php
                                 $from = 0;
@@ -126,10 +126,23 @@ if (isset($tpl['status'])) {
                         if ($i == 0 && $controller->isUser()) {
                             ?>
                             <div class="nr_team">
-                                <select class="text-all" name="number">
-                                    <?php for ($j = $tpl['user_team']['number_from']; $j <= $tpl['user_team']['number_to']; $j++) {
+                                <select class="text-all" name="number" id="number_id">
+                                    <?php
+                                    for ($j = 1; $j <= 9; $j++){
                                         ?>
-                                        <option value="<?php echo $j; ?>"><?php echo $j; ?></option>
+                                        <option value="<?php echo $j; ?>"  <?php echo ($tpl['rider']['number'] == $j)?"selected='selected'":""; ?>><?php echo $j; ?></option>
+                                        <?php
+                                    }
+
+                                    if (9 >= $tpl['user_team']['number_from']){
+                                        $min = 10;
+                                    } else{
+                                        $min = $tpl['user_team']['number_from'];
+                                    }
+                                    
+                                    for ($j = $min; $j <= $tpl['user_team']['number_to']; $j++) {
+                                        ?>
+                                        <option value="<?php echo $j; ?>" <?php echo ($tpl['rider']['number'] == $j)?"selected='selected'":""; ?>><?php echo $j; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -138,18 +151,7 @@ if (isset($tpl['status'])) {
                             <?php
                         } elseif ($i == 0) {
                             ?>
-                            <div class="nr_team">
-                                <select class="text-all" name="number" >
-                                    <?php
-                                    for ($j = $from; $j <= $to; $j++) {
-                                        ?>
-                                        <option <?php echo ($tpl['rider']['number'] == $j) ? "selected='selected'" : ""; ?> value="<?php echo $j; ?>"><?php echo $j; ?></option>
-                                        <?php
-                                    }
-                                    ?>
-
-                                </select>
-                            </div>
+                            <input type="text" name="number" class="text-all" value="<?php echo $tpl['rider']['number']; ?>" id="number_id"/>
                             <?php
                         } else {
                             echo @$tpl['arr'][$i - 1]['number'];
@@ -267,7 +269,7 @@ if (isset($tpl['status'])) {
                         <?php
                         if ($i == 0) {
                             ?>
-                            <input type="checkbox" class="checkboxClass" name="f_dm" value="1"  <?php echo ($tpl['rider']['f_dm'] == '1') ? "checked='checked'" : ""; ?> <?php echo ($controller->isUser())?'disabled="disabled"':'';  ?>  data-label="<?php echo $CMS_LANG['f_dm']; ?>"/>
+                            <input type="checkbox" class="checkboxClass" name="f_dm" value="1"  <?php echo ($tpl['rider']['f_dm'] == '1') ? "checked='checked'" : ""; ?> <?php echo ($controller->isUser()) ? 'disabled="disabled"' : ''; ?>  data-label="<?php echo $CMS_LANG['f_dm']; ?>"/>
                             <?php
                         } else {
                             if (!empty($tpl['arr'][$i - 1]['f_dm'])) {

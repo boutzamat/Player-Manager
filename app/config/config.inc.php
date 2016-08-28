@@ -34,14 +34,14 @@ if (!$stop)
 		define("DEFAULT_USER",   "root");
 		define("DEFAULT_PASS",   "");
 		define("DEFAULT_DB",     "playermanager");
-		define("DEFAULT_PREFIX", "");
+		define("DEFAULT_PREFIX", "org_");
 	} else {
 		# REMOTE
 		define("DEFAULT_HOST",   "localhost");
 		define("DEFAULT_USER",   "root");
 		define("DEFAULT_PASS",   "");
 		define("DEFAULT_DB",     "playermanager");
-		define("DEFAULT_PREFIX", "");
+		define("DEFAULT_PREFIX", "org_");
 	}
 	
 	if (preg_match('/\[hostname\]/', DEFAULT_HOST))
@@ -64,13 +64,13 @@ if (!$stop)
 	
 	if (isset($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] == '127.0.0.1')
 	{
-		if (!defined("INSTALL_FOLDER")) define("INSTALL_FOLDER", "/Player-Manager/");
-		if (!defined("INSTALL_PATH")) define("INSTALL_PATH", "C:/xampp/htdocs/Player-Manager/");
-		if (!defined("INSTALL_URL")) define("INSTALL_URL", "http://localhost/Player-Manager/");
+		if (!defined("INSTALL_FOLDER")) define("INSTALL_FOLDER", "/register/");
+		if (!defined("INSTALL_PATH")) define("INSTALL_PATH", "C:/xampp/htdocs/register/");
+		if (!defined("INSTALL_URL")) define("INSTALL_URL", "http://localhost/register/");
 	} else {
-		if (!defined("INSTALL_FOLDER")) define("INSTALL_FOLDER", "/Player-Manager/");
-		if (!defined("INSTALL_PATH")) define("INSTALL_PATH", "C:/xampp/htdocs/Player-Manager/");
-		if (!defined("INSTALL_URL")) define("INSTALL_URL", "http://localhost/Player-Manager/");
+		if (!defined("INSTALL_FOLDER")) define("INSTALL_FOLDER", "/register/");
+		if (!defined("INSTALL_PATH")) define("INSTALL_PATH", "C:/xampp/htdocs/register/");
+		if (!defined("INSTALL_URL")) define("INSTALL_URL", "http://localhost/register/");
 	}
 }
 

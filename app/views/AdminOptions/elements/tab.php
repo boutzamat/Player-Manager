@@ -22,7 +22,7 @@ if (isset($tpl['arr']))
 				<table cellpadding="2" cellspacing="1" class="cms-table">
 					<thead>
 						<tr>
-							<th class="sub" style="width: 50%"><?php echo $CMS_LANG['option_description']; ?></th>
+							<th class="sub" style="width: 20%"><?php echo $CMS_LANG['option_description']; ?></th>
 							<th class="sub"><?php echo $CMS_LANG['option_value']; ?></th>
 						</tr>
 					</thead>
@@ -47,7 +47,7 @@ if (isset($tpl['arr']))
 										?><input type="text" name="value-<?php echo $arr[$i]['type']; ?>-<?php echo $arr[$i]['key']; ?>" class="text w300" value="<?php echo htmlspecialchars(stripslashes($arr[$i]['value'])); ?>" /><?php
 										break;
 									case 'text':
-										?><textarea name="value-<?php echo $arr[$i]['type']; ?>-<?php echo $arr[$i]['key']; ?>" class="textarea w400 h320"><?php echo htmlspecialchars(stripslashes($arr[$i]['value'])); ?></textarea><?php
+										?><textarea name="value-<?php echo $arr[$i]['type']; ?>-<?php echo $arr[$i]['key']; ?>" class="textarea w600 h200"><?php echo htmlspecialchars(stripslashes($arr[$i]['value'])); ?></textarea><?php
 										break;
 									case 'int':
 										?><input type="text" name="value-<?php echo $arr[$i]['type']; ?>-<?php echo $arr[$i]['key']; ?>" class="text w50 align_right digits" value="<?php echo htmlspecialchars(stripslashes($arr[$i]['value'])); ?>" />

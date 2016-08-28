@@ -118,7 +118,7 @@ class AdminUsers extends Admin {
      */
     function index() {
         if ($this->isLoged()) {
-            if ($this->isAdmin()) {
+          //  if ($this->isAdmin()) {
                 if (!$this->isMultiUser()) {
                     $this->tpl['status'] = 9;
                     return;
@@ -156,9 +156,9 @@ class AdminUsers extends Admin {
                 $this->js[] = array('file' => 'jquery.validate.js', 'path' => LIBS_PATH . 'jquery/plugins/validate/js/');
                 $this->js[] = array('file' => 'jquery.multiselect.min.js', 'path' => LIBS_PATH . 'jquery/');
                 $this->js[] = array('file' => 'adminUsers.js', 'path' => JS_PATH);
-            } else {
+          /*  } else {
                 $this->tpl['status'] = 2;
-            }
+            }*/
         } else {
             $this->tpl['status'] = 1;
         }

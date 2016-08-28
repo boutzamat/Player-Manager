@@ -16,24 +16,46 @@
         }
         ?>
     </select>
-    <select name="filter" class="select select-margin">
-        <option value=""><?php echo $CMS_LANG['filter_by']; ?></option>
-        <?php
-        if ($controller->isUser()) {
+    <?php
+    if ($controller->isUser()) {
+        ?>
+        <select name="group_filter" class="select select-margin">
+            <option value=""><?php echo $CMS_LANG['filter_by_group']; ?></option>
+            <?php
             foreach ($tpl['group_arr'] as $k => $v) {
                 ?>
-                <option value="<?php echo $v['id']; ?>" <?php echo (isset($_REQUEST['filter']) && $_REQUEST['filter'] == $v['id']) ? "selected='selected'" : ""; ?>><?php echo $v['group_name']; ?></option>
+                <option value="<?php echo $v['id']; ?>" <?php echo (isset($_REQUEST['group_filter']) && $_REQUEST['group_filter'] == $v['id']) ? "selected='selected'" : ""; ?>><?php echo $v['group_name']; ?></option>
                 <?php
             }
-        } else {
+            ?>
+        </select>
+        <?php
+    } else {
+        ?>
+        <select name="filter" class="select select-margin">
+            <option value=""><?php echo $CMS_LANG['filter_by_team']; ?></option>
+            <?php
             foreach ($tpl['team_arr'] as $k => $v) {
                 ?>
                 <option value="<?php echo $v['id']; ?>" <?php echo (isset($_REQUEST['filter']) && $_REQUEST['filter'] == $v['id']) ? "selected='selected'" : ""; ?>><?php echo $v['team_name']; ?></option>
                 <?php
             }
-        }
-        ?>
-    </select>
+            ?>
+        </select>
+        <select name="group_filter" class="select select-margin">
+            <option value=""><?php echo $CMS_LANG['filter_by_group']; ?></option>
+            <?php
+            foreach ($tpl['group_arr'] as $k => $v) {
+                ?>
+                <option value="<?php echo $v['id']; ?>" <?php echo (isset($_REQUEST['group_filter']) && $_REQUEST['group_filter'] == $v['id']) ? "selected='selected'" : ""; ?>><?php echo $v['group_name']; ?></option>
+                <?php
+            }
+            ?>
+        </select>
+        <?php
+    }
+    ?>
+
     <div style = "clear: both;"></div>
 </form>
 <?php
@@ -87,7 +109,7 @@ if (isset($tpl['status'])) {
         <thead>
             <tr>
                 <th class="sub"><?php echo $CMS_LANG['team_name']; ?></th>
-                <th class="sub"><?php echo $CMS_LANG['rider_nr']; ?></th>
+                <th class="sub" width="7%"><?php echo $CMS_LANG['rider_nr']; ?></th>
                 <th class="sub"><?php echo $CMS_LANG['rider_group']; ?></th>
                 <th class="sub"><?php echo $CMS_LANG['rider_name']; ?></th>
                 <th class="sub" colspan="3"><?php echo $CMS_LANG['rider_qualification']; ?></th>
@@ -128,8 +150,21 @@ if (isset($tpl['status'])) {
                         if ($i == 0 && $controller->isUser()) {
                             ?>
                             <div class="nr_team">
-                                <select class="text-all" name="number">
-                                    <?php for ($j = $tpl['user_team']['number_from']; $j <= $tpl['user_team']['number_to']; $j++) {
+                                <select class="text-all" name="number" id="number_id">
+                                    <?php
+                                    for ($j = 1; $j <= 9; $j++){
+                                        ?>
+                                        <option value="<?php echo $j; ?>"><?php echo $j; ?></option>
+                                        <?php
+                                    }
+                                    
+                                    if(9 >= $tpl['user_team']['number_from']){
+                                        $min = 10;
+                                    }else{
+                                        $min = $tpl['user_team']['number_from'];
+                                    }
+                                    
+                                    for ($j = $min; $j <= $tpl['user_team']['number_to']; $j++) {
                                         ?>
                                         <option value="<?php echo $j; ?>"><?php echo $j; ?></option>
                                         <?php
@@ -140,11 +175,7 @@ if (isset($tpl['status'])) {
                             <?php
                         } elseif ($i == 0) {
                             ?>
-                            <div class="nr_team">
-                                <select class="text-all" name="number" disabled="disabled">
-                                    <option></option>
-                                </select>
-                            </div>
+                            <input type="text" name="number" class="text-all" id="number_id"/>
                             <?php
                         } else {
                             echo @$tpl['arr'][$i - 1]['number'];
@@ -261,9 +292,8 @@ if (isset($tpl['status'])) {
                     <td >
                         <?php
                         if ($i == 0) {
-                            
                             ?>
-                            <input  class="checkboxClass" type="checkbox" class="text-all" name="f_dm" value="1" data-label="<?php echo $CMS_LANG['f_dm']; ?>" <?php echo ($controller->isUser())?'disabled="disabled"':'';  ?>/>
+                            <input  class="checkboxClass" type="checkbox" class="text-all" name="f_dm" value="1" data-label="<?php echo $CMS_LANG['f_dm']; ?>" <?php echo ($controller->isUser()) ? 'disabled="disabled"' : ''; ?>/>
                             <?php
                         } else {
                             if (!empty($tpl['arr'][$i - 1]['f_dm'])) {
