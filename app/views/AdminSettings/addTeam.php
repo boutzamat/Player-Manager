@@ -38,14 +38,14 @@ $count = count($tpl['team_arr']) + 1;
     }
     ?>
 </div>
-<table class="cms-table" >
+<table class="cms-table table table-striped" >
     <thead>
         <tr>
             <th class="sub"  width="60%"><?php echo $CMS_LANG['team']; ?></th>
             <th class="sub"><?php echo $CMS_LANG['team_from']; ?></th>
             <th class="sub"><?php echo $CMS_LANG['team_to']; ?></th>
-            <th class="sub" width= "10%"></th>
-            <th class="sub" width= "10%"></th>
+            <th class="sub" width= "1%"></th>
+            <th class="sub" width= "1%"></th>
         </tr>
     </thead>
     <tbody>
@@ -57,7 +57,7 @@ $count = count($tpl['team_arr']) + 1;
                     <?php
                     if ($i == 0) {
                         ?>
-                        <input type="text" class="text-all" name="team_name"/>
+                        <input type="text" class="text-all form-control" name="team_name"/>
                         <?php
                     } else {
                         echo stripslashes($tpl['team_arr'][$i - 1]['team_name']);
@@ -68,7 +68,7 @@ $count = count($tpl['team_arr']) + 1;
                     <?php
                     if ($i == 0) {
                         ?>
-                        <input type="text" class="text-all" name="number_from"/>
+                        <input type="text" class="text-all form-control" name="number_from"/>
                         <?php
                     } else {
                         echo stripslashes($tpl['team_arr'][$i - 1]['number_from']);
@@ -79,7 +79,7 @@ $count = count($tpl['team_arr']) + 1;
                     <?php
                     if ($i == 0) {
                         ?>
-                        <input type="text" class="text-all" name="number_to"/>
+                        <input type="text" class="text-all form-control" name="number_to"/>
                         <?php
                     } else {
                         echo stripslashes($tpl['team_arr'][$i - 1]['number_to']);
@@ -90,20 +90,20 @@ $count = count($tpl['team_arr']) + 1;
                 if ($i == 0) {
                     ?>
                     <td>
-                        <a class="icon icon-add" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminSettings&amp;action=addTeam&amp;id=<?php echo $tpl['team_arr'][$i - 1]['id']; ?>"><?php echo $CMS_LANG['_add']; ?></a>
+                        <a class="icon icon-add btn btn-sm btn-default" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminSettings&amp;action=addTeam&amp;id=<?php echo $tpl['team_arr'][$i - 1]['id']; ?>"><?php echo $CMS_LANG['_add']; ?></a>
                     </td>
                     <?php
                 } else {
                     ?>
                     <td>
-                        <a class="icon icon-edit ajax_item_name" axis="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminSettings&amp;action=updateTeam&amp;id=<?php echo @$tpl['team_arr'][$i - 1]['id']; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminSettings&amp;action=updateTeam&amp;id=<?php echo $tpl['team_arr'][$i - 1]['id']; ?>"><?php echo $CMS_LANG['_edit']; ?></a>
+                        <a class="icon icon-edit ajax_item_name btn btn-sm btn-default" axis="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminSettings&amp;action=updateTeam&amp;id=<?php echo @$tpl['team_arr'][$i - 1]['id']; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminSettings&amp;action=updateTeam&amp;id=<?php echo $tpl['team_arr'][$i - 1]['id']; ?>"><?php echo $CMS_LANG['_edit']; ?></a>
                     </td>
                 <?php } ?>
                 <td>
                     <?php if ($i == 0) { ?>
                         &nbsp;
                     <?php } else { ?>
-                        <a class="icon icon-delete" rev="<?php echo $tpl['team_arr'][$i - 1]['id']; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminSettings&amp;action=deleteTeam&amp;id=<?php echo $tpl['team_arr'][$i - 1]['id']; ?>"><?php echo $CMS_LANG['_delete']; ?></a>
+                        <a class="icon icon-delete btn btn-sm btn-default" rev="<?php echo $tpl['team_arr'][$i - 1]['id']; ?>" href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminSettings&amp;action=deleteTeam&amp;id=<?php echo $tpl['team_arr'][$i - 1]['id']; ?>"><?php echo $CMS_LANG['_delete']; ?></a>
                     <?php } ?>
                 </td>
             </tr>
@@ -115,11 +115,11 @@ $count = count($tpl['team_arr']) + 1;
 <?php
 if (isset($tpl['team_paginator'])) {
     ?>
-    <ul class="cms-paginator">
+    <ul class="cms-paginator pagination">
         <?php
         for ($i = 1; $i <= $tpl['team_paginator']['pages']; $i++) {
             if ((isset($_GET['page']) && (int) $_GET['page'] == $i) || (!isset($_GET['page']) && $i == 1)) {
-                ?><li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=<?php echo $_GET['controller']; ?>&amp;action=index&amp;page=<?php echo $i; ?>" class="focus"><?php echo $i; ?></a></li><?php
+                ?><li class="active"><a href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=<?php echo $_GET['controller']; ?>&amp;action=index&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a></li><?php
         } else {
                 ?><li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?controller=<?php echo $_GET['controller']; ?>&amp;action=index&amp;page=<?php echo $i; ?>"><?php echo $i; ?></a></li><?php
         }

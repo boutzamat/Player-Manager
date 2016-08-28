@@ -2,6 +2,10 @@ body {
 	margin-bottom:75px;
 }
 
+pre.form-control {
+	height:auto;
+}
+
 .navbar-brand > img{
 	max-height:100%;
 }
@@ -16,3 +20,4 @@ body {
 	padding-top:20px;
 	padding-bottom:20px;
 }
+

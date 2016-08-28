@@ -22,14 +22,13 @@ if (isset($tpl['status'])) {
         <div id="tabs-1">
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="sbs-form">
                 <p><span class="bold block b10"><?php echo $CMS_LANG['o_install']['js'][1]; ?></span>
-                    <textarea class="textarea textarea-install w600 h150 overflow">
-    &lt;link href="<?php echo INSTALL_FOLDER . CSS_PATH; ?>front.css" type="text/css" rel="stylesheet" /&gt;
-    &lt;script type="text/javascript" src="<?php echo INSTALL_FOLDER . JS_PATH; ?>jabb-0.3.js"&gt;&lt;/script&gt;
-    &lt;script type="text/javascript" src="<?php echo INSTALL_FOLDER . JS_PATH; ?>scms.js"&gt;&lt;/script&gt;
-                    </textarea></p>
+                    <pre class="textarea textarea-install w600 h150 overflow form-control" rows="3">
+&lt;link href="<?php echo INSTALL_FOLDER . CSS_PATH; ?>front.css" type="text/css" rel="stylesheet" /&gt;
+&lt;script type="text/javascript" src="<?php echo INSTALL_FOLDER . JS_PATH; ?>jabb-0.3.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="<?php echo INSTALL_FOLDER . JS_PATH; ?>scms.js"&gt;&lt;/script&gt;</pre></p>
                 <p><span class="bold block b10"><?php echo $CMS_LANG['o_install']['js'][2]; ?></span>
-                    <textarea class="textarea textarea-install w600 h80 overflow">
-    &lt;script type="text/javascript" src="<?php echo INSTALL_FOLDER; ?>index.php?controller=Front&amp;action=load"&gt;&lt;/script&gt;</textarea></p>
+                    <pre class="textarea textarea-install w600 h80 overflow form-control" rows="1">
+&lt;script type="text/javascript" src="<?php echo INSTALL_FOLDER; ?>index.php?controller=Front&amp;action=load"&gt;&lt;/script&gt;</pre></p>
                
             </form>
         </div> <!-- tabs-1 -->

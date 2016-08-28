@@ -60,7 +60,6 @@ if (isset($tpl['status'])) {
 		<?php } ?>
 		<div class="tab-content">
 			<div id="tabs-1" role="tabpanel" class="tab-pane active">
-				<h3>Current users</h3>
 				<div id="info_list_box">
 					<p><?php echo Util::printNotice($CMS_LANG['user_list_info']); ?></p>
 				</div>
@@ -156,7 +155,6 @@ if (isset($tpl['status'])) {
 				if ($controller->isAdmin()) {
 			?>
 			<div id="tabs-2" role="tabpanel" class="tab-pane">
-				<h3>Add new user</h3>
 				<div id="info_add_box">
 					<p><?php echo Util::printNotice($CMS_LANG['user_add_info']); ?></p>
 				</div>

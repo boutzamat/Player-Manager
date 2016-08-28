@@ -31,16 +31,18 @@ if (isset($tpl['status']))
 	<form action="<?php echo $_SERVER['PHP_SELF']; ?>?controller=AdminOptions&amp;action=update" method="post" class="cms-form">
 		<input type="hidden" name="options_update" value="1" />
 		<input type="hidden" name="tab_id" value="<?php echo isset($_GET['tab_id']) && !empty($_GET['tab_id']) ? $_GET['tab_id'] : 'tabs-1'; ?>" />
-		<div id="tabs">
-			<ul>
-				<li><a href="#tabs-1"><?php echo $CMS_LANG['option_general']; ?></a></li>
+		<div id="optionsTab">
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="active" role="presentation"><a href="#tabs-1" aria-controls="general" role="tab" data-toggle="tab"><?php echo $CMS_LANG['option_general']; ?></a></li>
 			</ul>
-			<div id="tabs-1">
-			<?php
-			$tab_id = 1;
-			include VIEWS_PATH . 'AdminOptions/elements/tab.php'
-			?>
-			</div> <!-- tabs- -->
+			<div class="tab-content">
+				<div id="tabs-1" role="tabpanel" class="tab-pane active">
+				<?php
+				$tab_id = 1;
+				include VIEWS_PATH . 'AdminOptions/elements/tab.php'
+				?>
+				</div> <!-- tabs- -->
+			</div>
 		</div>
 	</form>
 	<?php

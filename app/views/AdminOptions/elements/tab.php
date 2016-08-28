@@ -19,10 +19,9 @@ if (isset($tpl['arr']))
 					?><h3><?php echo $group; ?></h3><?php
 				}
 				?>
-				<table cellpadding="2" cellspacing="1" class="cms-table">
+				<table class="cms-table table">
 					<thead>
 						<tr>
-							<th class="sub" style="width: 20%"><?php echo $CMS_LANG['option_description']; ?></th>
 							<th class="sub"><?php echo $CMS_LANG['option_value']; ?></th>
 						</tr>
 					</thead>
@@ -38,7 +37,6 @@ if (isset($tpl['arr']))
 						?><tr class="<?php echo ($j % 2 === 0 ? 'odd' : 'even'); ?>"><?php
 						
 						?>
-							<td class="align_top"><?php echo stripslashes($arr[$i]['description']);?></td>
 							<td class="align_top">
 								<?php
 								switch ($arr[$i]['type'])
@@ -47,7 +45,7 @@ if (isset($tpl['arr']))
 										?><input type="text" name="value-<?php echo $arr[$i]['type']; ?>-<?php echo $arr[$i]['key']; ?>" class="text w300" value="<?php echo htmlspecialchars(stripslashes($arr[$i]['value'])); ?>" /><?php
 										break;
 									case 'text':
-										?><textarea name="value-<?php echo $arr[$i]['type']; ?>-<?php echo $arr[$i]['key']; ?>" class="textarea w600 h200"><?php echo htmlspecialchars(stripslashes($arr[$i]['value'])); ?></textarea><?php
+										?><textarea name="value-<?php echo $arr[$i]['type']; ?>-<?php echo $arr[$i]['key']; ?>" class="textarea w600 h200 form-control" rows="10"><?php echo htmlspecialchars(stripslashes($arr[$i]['value'])); ?></textarea><?php
 										break;
 									case 'int':
 										?><input type="text" name="value-<?php echo $arr[$i]['type']; ?>-<?php echo $arr[$i]['key']; ?>" class="text w50 align_right digits" value="<?php echo htmlspecialchars(stripslashes($arr[$i]['value'])); ?>" />
@@ -107,8 +105,7 @@ if (isset($tpl['arr']))
 				}
 			}
 			?>
-			<p>&nbsp;</p>
-			<p><input type="submit" value="" class="button button_save" /></p>
+			<p><button type="submit" value="" class="button button_save btn btn-primary">Save</button></p>
 			<?php
 		}
 	}
